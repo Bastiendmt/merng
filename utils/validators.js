@@ -1,0 +1,30 @@
+module.exports.validateRegisterInput = (
+  username,
+  email,
+  password,
+  confirmPassword
+) => {
+  const errors = {};
+  if (username.trim() === "") {
+    errors.username = "Username must not be empty";
+  }
+  if (email.trim() === "") {
+    errors.email = "email must not be empty";
+  } else {
+    const regEx = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g;
+    if (!email.match(regEx)) {
+      errors.email = "Email must be a valid email addres";
+    }
+  }
+
+  if (password === "") {
+    errors.password = "Password must not be empty";
+  } else if (password !== confirmPassword) {
+    errors.confirmPassword = "Passwords does not match";
+  }
+
+  return {
+    errors,
+    valid: Object.keys(errors).length < 1,
+  };
+};
