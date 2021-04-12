@@ -32,7 +32,7 @@ const PostCard = ({
             {likeCount}
           </Label>
         </Button>
-        <Button as="div" labelPosition="right" onClick={commentPost}>
+        <Button as="div" labelPosition="right" onClick={commentPost} floated='right'>
           <Button color="blue" basic>
             <Icon name="comments" />
           </Button>
