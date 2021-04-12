@@ -37,7 +37,7 @@ module.exports = {
       const user = await User.findOne({ username });
       if (user) {
         throw new UserInputError("Username is already taken", {
-          error: {
+          errors: {
             username: "This username is taken",
           },
         });
