@@ -38,18 +38,24 @@ const PostForm = () => {
   }
 
   return (
-    <Form onSubmit={onSubmit}>
-      <h2>Create a post</h2>
-      <Form.Input
-        placeholder="Hi world!"
-        name="body"
-        onChange={onChange}
-        value={values.body}
-      />
-      <Button type="submit" color="teal">
-        Submit
-      </Button>
-    </Form>
+    <>
+      <Form onSubmit={onSubmit}>
+        <h2>Create a post</h2>
+        <Form.Input
+          placeholder="Hi world!"
+          name="body"
+          onChange={onChange}
+          value={values.body}
+          error={error ? true : false}
+        />
+        <Button type="submit" color="teal">
+          Submit
+        </Button>
+      </Form>
+      {error && (
+        <div className="ui message error" style={{marginBottom : 20}}>{error.graphQLErrors[0].message}</div>
+      )}
+    </>
   );
 };
 
