@@ -1,10 +1,12 @@
 import { gql } from "apollo-server-core";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Button, Form } from "semantic-ui-react";
 import { useMutation } from "@apollo/client";
 import { useForm } from "../utils/hooks";
+import { AuthContext } from "../context/auth";
 
 const Register = (props) => {
+  const context = useContext(AuthContext);
   const [errors, setErrors] = useState({});
 
   const initialState = {
@@ -17,22 +19,22 @@ const Register = (props) => {
   const { onChange, onSubmit, values } = useForm(registerUser, initialState);
 
   const [addUser, { loading }] = useMutation(REGISTER_USER, {
-    update(_, result) {
-      console.log(result)
+    update(_, { data: { register: userData } }) {
+      context.login(userData);
       props.history.push("/");
     },
     onError(error) {
-      console.log(error.graphQLErrors[0])
-      
-      console.log(error.graphQLErrors[0].extensions.exception.errors)
+      console.log(error.graphQLErrors[0]);
+
+      console.log(error.graphQLErrors[0].extensions.exception.errors);
       setErrors(error.graphQLErrors[0].extensions.exception.errors);
     },
     variables: values,
   });
 
-  function registerUser () {
+  function registerUser() {
     addUser();
-  };
+  }
 
   return (
     <div className="form-container">
