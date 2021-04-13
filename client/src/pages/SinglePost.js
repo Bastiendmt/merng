@@ -1,20 +1,17 @@
 import { useMutation, useQuery } from "@apollo/client";
 import gql from "graphql-tag";
 import moment from "moment";
-import React, { useContext, useState, useRef } from "react";
+import React, { useContext, useRef, useState } from "react";
 import {
-  Button,
   Card,
   Form,
   Grid,
-  Icon,
-  Image,
-  Label,
+  Image
 } from "semantic-ui-react";
-import { AuthContext } from "../context/auth";
+import CommentButton from "../components/CommentButton";
 import DeleteButton from "../components/DeleteButton";
 import LikeButton from "../components/LikeButton";
-import CommentButton from "../components/CommentButton";
+import { AuthContext } from "../context/auth";
 
 const SinglePost = (props) => {
   const { user } = useContext(AuthContext);

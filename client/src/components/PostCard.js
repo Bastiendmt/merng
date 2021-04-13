@@ -11,12 +11,9 @@ const PostCard = ({
 }) => {
   const { user } = useContext(AuthContext);
 
-  const likePost = () => {};
-  const commentPost = () => {};
-
   return (
     <Card fluid>
-      <Card.Content>
+      <Card.Content as={Link} to={`/post/${id}`}>
         <Image
           floated="right"
           size="mini"
@@ -28,15 +25,13 @@ const PostCard = ({
 
         <Card.Header>{username}</Card.Header>
 
-        <Card.Meta as={Link} to={`/post/${id}`}>
-          {moment(createdAt).fromNow(true)}
-        </Card.Meta>
+        <Card.Meta>{moment(createdAt).fromNow(true)}</Card.Meta>
 
         <Card.Description>{body}</Card.Description>
       </Card.Content>
       <Card.Content extra>
         <LikeButton post={{ id, likes, likeCount }} user={user} />
-        <CommentButton postId={id} commentCount={commentCount} role="link"/>
+        <CommentButton postId={id} commentCount={commentCount} role="link" />
       </Card.Content>
     </Card>
   );
