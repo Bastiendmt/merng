@@ -23,20 +23,18 @@ const PostCard = ({
           style={{ borderRadius: "50%" }}
         />
 
-        {user && user.username === username && (
-          <DeleteButton postId={id} />
-                  )}
+        {user && user.username === username && <DeleteButton postId={id} />}
 
         <Card.Header>{username}</Card.Header>
 
-        <Card.Meta as={Link} to={`/posts/${id}`}>
+        <Card.Meta as={Link} to={`/post/${id}`}>
           {moment(createdAt).fromNow(true)}
         </Card.Meta>
 
         <Card.Description>{body}</Card.Description>
       </Card.Content>
       <Card.Content extra>
-        <LikeButton post={{id, likes, likeCount}} user={user}/>
+        <LikeButton post={{ id, likes, likeCount }} user={user} />
         <Button
           labelPosition="right"
           as={Link}
