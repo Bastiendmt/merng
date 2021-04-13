@@ -63,7 +63,7 @@ const SinglePost = (props) => {
               style={{ borderRadius: "50%" }}
             />
           </Grid.Column>
-          <Grid.Column width={10}>
+          <Grid.Column width={12}>
             <Card fluid>
               <Card.Content>
                 <Card.Header>
@@ -85,7 +85,7 @@ const SinglePost = (props) => {
         </Grid.Row>
         <Grid.Row>
           <Grid.Column width={2} />
-          <Grid.Column width={10}>
+          <Grid.Column width={12}>
             {user && (
               <Card fluid>
                 <Card.Content>
