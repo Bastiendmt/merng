@@ -7,7 +7,7 @@ module.exports = {
   Query: {
     async getPosts() {
       try {
-        return await Post.find().sort({ createdAt: 1 });
+        return await Post.find().sort({ createdAt: -1 });
       } catch (error) {
         throw new Error(error);
       }
