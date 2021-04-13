@@ -4,6 +4,7 @@ import { Card, Image, Button, Icon, Label } from "semantic-ui-react";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../context/auth";
 import LikeButton from "./LikeButton";
+import DeleteButton from "./DeleteButton";
 const PostCard = ({
   post: { id, body, createdAt, username, likeCount, commentCount, likes },
 }) => {
@@ -23,13 +24,8 @@ const PostCard = ({
         />
 
         {user && user.username === username && (
-          <Button
-            floated="right"
-            onClick={() => console.log("delete")}
-            icon="trash"
-            size="medium"
-          />
-        )}
+          <DeleteButton postId={id} />
+                  )}
 
         <Card.Header>{username}</Card.Header>
 
