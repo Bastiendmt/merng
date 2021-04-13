@@ -1,31 +1,10 @@
-import React, { useContext } from "react";
 import { useQuery } from "@apollo/client";
-import gql from "graphql-tag";
+import React, { useContext } from "react";
 import { Grid, GridColumn } from "semantic-ui-react";
 import PostCard from "../components/PostCard";
-import { AuthContext } from "../context/auth";
 import PostForm from "../components/PostForm";
-
-const FETCH_POSTS_QUERY = gql`
-  {
-    getPosts {
-      id
-      body
-      createdAt
-      username
-      likeCount
-      likes {
-        username
-      }
-      commentCount
-      comments {
-        id
-        username
-        createdAt
-      }
-    }
-  }
-`;
+import { AuthContext } from "../context/auth";
+import { FETCH_POSTS_QUERY } from "../utils/graphql";
 
 function Home() {
   const { user } = useContext(AuthContext);
