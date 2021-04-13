@@ -1,11 +1,14 @@
 import moment from "moment";
-import React from "react";
+import React, { useContext } from "react";
 import { Card, Image, Button, Icon, Label } from "semantic-ui-react";
 import { Link } from "react-router-dom";
-
+import { AuthContext } from "../context/auth";
+import LikeButton from "./LikeButton";
 const PostCard = ({
-  post: { id, body, createdAt, username, likeCount, commentCount },
+  post: { id, body, createdAt, username, likeCount, commentCount, likes },
 }) => {
+  const { user } = useContext(AuthContext);
+
   const likePost = () => {};
   const commentPost = () => {};
 
@@ -16,24 +19,34 @@ const PostCard = ({
           floated="right"
           size="mini"
           src="https://react.semantic-ui.com/images/avatar/large/molly.png"
-          style={{borderRadius : '50%'}}
+          style={{ borderRadius: "50%" }}
         />
+
+        {user && user.username === username && (
+          <Button
+            floated="right"
+            onClick={() => console.log("delete")}
+            icon="trash"
+            size="medium"
+          />
+        )}
+
         <Card.Header>{username}</Card.Header>
+
         <Card.Meta as={Link} to={`/posts/${id}`}>
           {moment(createdAt).fromNow(true)}
         </Card.Meta>
+
         <Card.Description>{body}</Card.Description>
       </Card.Content>
       <Card.Content extra>
-        <Button as="div" labelPosition="right" onClick={likePost}>
-          <Button color="teal" basic>
-            <Icon name="heart" />
-          </Button>
-          <Label basic color="teal" pointing="left">
-            {likeCount}
-          </Label>
-        </Button>
-        <Button as="div" labelPosition="right" onClick={commentPost} floated='right'>
+        <LikeButton post={{id, likes, likeCount}} user={user}/>
+        <Button
+          labelPosition="right"
+          as={Link}
+          to={`/post/${id}`}
+          floated="right"
+        >
           <Button color="blue" basic>
             <Icon name="comments" />
           </Button>
