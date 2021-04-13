@@ -53,7 +53,7 @@ const SinglePost = (props) => {
             <Card fluid>
               <Card.Content>
                 <Card.Header>{username}</Card.Header>
-                <Card.Meta>{moment(createdAt).fromNow(true)}</Card.Meta>
+                <Card.Meta>{moment(createdAt).fromNow()}</Card.Meta>
                 <Card.Description>{body}</Card.Description>
               </Card.Content>
               <hr />
@@ -76,6 +76,25 @@ const SinglePost = (props) => {
                 )}
               </Card.Content>
             </Card>
+          </Grid.Column>
+        </Grid.Row>
+        <Grid.Row>
+          <Grid.Column width={2} />
+          <Grid.Column width={10}>
+            {comments.map((comment) => (
+              <Card fluid key={comment.id}>
+                <Card.Content>
+                  <Card.Header>{comment.username}</Card.Header>
+                  <Card.Meta>
+                    {moment(comment.createdAt).fromNow(true)}
+                  </Card.Meta>
+                  <Card.Description>{comment.body}</Card.Description>
+                  {user && user.username === comment.username && (
+                    <DeleteButton postId={id} commentId={comment.id}/>
+                  )}
+                </Card.Content>
+              </Card>
+            ))}
           </Grid.Column>
         </Grid.Row>
       </Grid>
