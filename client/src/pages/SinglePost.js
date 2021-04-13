@@ -12,8 +12,8 @@ import {
   Label,
 } from "semantic-ui-react";
 import { AuthContext } from "../context/auth";
-import DeleteButton from "./DeleteButton";
-import LikeButton from "./LikeButton";
+import DeleteButton from "../components/DeleteButton";
+import LikeButton from "../components/LikeButton";
 
 const SinglePost = (props) => {
   const { user } = useContext(AuthContext);
