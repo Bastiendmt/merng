@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import { AuthContext } from "../context/auth";
 import LikeButton from "./LikeButton";
 import DeleteButton from "./DeleteButton";
+import CommentButton from "./CommentButton";
 const PostCard = ({
   post: { id, body, createdAt, username, likeCount, commentCount, likes },
 }) => {
@@ -35,25 +36,7 @@ const PostCard = ({
       </Card.Content>
       <Card.Content extra>
         <LikeButton post={{ id, likes, likeCount }} user={user} />
-        <Popup
-          content="Comment on post"
-          inverted
-          trigger={
-            <Button
-              labelPosition="right"
-              as={Link}
-              to={`/post/${id}`}
-              floated="right"
-            >
-              <Button color="blue" basic>
-                <Icon name="comments" />
-              </Button>
-              <Label basic color="blue" pointing="left">
-                {commentCount}
-              </Label>
-            </Button>
-          }
-        />
+        <CommentButton postId={id} commentCount={commentCount} role="link"/>
       </Card.Content>
     </Card>
   );

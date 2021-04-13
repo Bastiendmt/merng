@@ -14,6 +14,7 @@ import {
 import { AuthContext } from "../context/auth";
 import DeleteButton from "../components/DeleteButton";
 import LikeButton from "../components/LikeButton";
+import CommentButton from "../components/CommentButton";
 
 const SinglePost = (props) => {
   const { user } = useContext(AuthContext);
@@ -80,18 +81,7 @@ const SinglePost = (props) => {
               <hr />
               <Card.Content extra>
                 <LikeButton user={user} post={{ id, likeCount, likes }} />
-                <Button
-                  as="div"
-                  labelPosition="right"
-                  onClick={() => console.log("comment on post")}
-                >
-                  <Button basic color="blue">
-                    <Icon name="comments" />
-                  </Button>
-                  <Label basic color="blue" pointing="left">
-                    {commentCount}
-                  </Label>
-                </Button>
+                <CommentButton postId={id} commentCount={commentCount} />
                 {user && user.username === username && (
                   <DeleteButton postId={id} callback={deletePostCallback} />
                 )}
