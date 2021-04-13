@@ -2,12 +2,7 @@ import { useMutation, useQuery } from "@apollo/client";
 import gql from "graphql-tag";
 import moment from "moment";
 import React, { useContext, useRef, useState } from "react";
-import {
-  Card,
-  Form,
-  Grid,
-  Image
-} from "semantic-ui-react";
+import { Card, Form, Grid, Image } from "semantic-ui-react";
 import CommentButton from "../components/CommentButton";
 import DeleteButton from "../components/DeleteButton";
 import LikeButton from "../components/LikeButton";

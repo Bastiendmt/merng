@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { Button, Icon, Label, Popup } from "semantic-ui-react";
+import { Button, Icon, Popup } from "semantic-ui-react";
 
 const CommentButton = ({ postId, commentCount, role }) => {
   return (
@@ -9,17 +9,14 @@ const CommentButton = ({ postId, commentCount, role }) => {
       inverted
       trigger={
         <Button
-          labelPosition="right"
-          as={role === 'link' ? Link : "div"}
+          color="blue"
+          basic
+          as={role === "link" ? Link : "div"}
           to={`/post/${postId}`}
           floated="right"
         >
-          <Button color="blue" basic>
-            <Icon name="comments" />
-          </Button>
-          <Label basic color="blue" pointing="left">
-            {commentCount}
-          </Label>
+          <Icon name="comments" />
+          {commentCount}
         </Button>
       }
     />
