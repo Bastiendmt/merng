@@ -1,19 +1,12 @@
 import { useMutation, useQuery } from "@apollo/client";
 import gql from "graphql-tag";
 import moment from "moment";
-import React, { useContext, useState, useRef } from "react";
-import {
-  Button,
-  Card,
-  Form,
-  Grid,
-  Icon,
-  Image,
-  Label,
-} from "semantic-ui-react";
+import React, { useContext, useRef, useState } from "react";
+import { Card, Form, Grid, Image } from "semantic-ui-react";
+import CommentButton from "../components/CommentButton";
+import DeleteButton from "../components/DeleteButton";
+import LikeButton from "../components/LikeButton";
 import { AuthContext } from "../context/auth";
-import DeleteButton from "./DeleteButton";
-import LikeButton from "./LikeButton";
 
 const SinglePost = (props) => {
   const { user } = useContext(AuthContext);
@@ -70,38 +63,29 @@ const SinglePost = (props) => {
               style={{ borderRadius: "50%" }}
             />
           </Grid.Column>
-          <Grid.Column width={10}>
+          <Grid.Column width={12}>
             <Card fluid>
               <Card.Content>
-                <Card.Header>{username}</Card.Header>
+                <Card.Header>
+                  {username}
+                  {user && user.username === username && (
+                    <DeleteButton postId={id} callback={deletePostCallback} />
+                  )}
+                </Card.Header>
                 <Card.Meta>{moment(createdAt).fromNow()}</Card.Meta>
                 <Card.Description>{body}</Card.Description>
               </Card.Content>
               <hr />
               <Card.Content extra>
                 <LikeButton user={user} post={{ id, likeCount, likes }} />
-                <Button
-                  as="div"
-                  labelPosition="right"
-                  onClick={() => console.log("comment on post")}
-                >
-                  <Button basic color="blue">
-                    <Icon name="comments" />
-                  </Button>
-                  <Label basic color="blue" pointing="left">
-                    {commentCount}
-                  </Label>
-                </Button>
-                {user && user.username === username && (
-                  <DeleteButton postId={id} callback={deletePostCallback} />
-                )}
+                <CommentButton postId={id} commentCount={commentCount} />
               </Card.Content>
             </Card>
           </Grid.Column>
         </Grid.Row>
         <Grid.Row>
           <Grid.Column width={2} />
-          <Grid.Column width={10}>
+          <Grid.Column width={12}>
             {user && (
               <Card fluid>
                 <Card.Content>
@@ -133,12 +117,14 @@ const SinglePost = (props) => {
             {comments.map((comment) => (
               <Card fluid key={comment.id}>
                 <Card.Content>
-                  <Card.Header>{comment.username}</Card.Header>
+                  <Card.Header>
+                    {comment.username}
+                    {user && user.username === comment.username && (
+                      <DeleteButton postId={id} commentId={comment.id} />
+                    )}
+                  </Card.Header>
                   <Card.Meta>{moment(comment.createdAt).fromNow()}</Card.Meta>
                   <Card.Description>{comment.body}</Card.Description>
-                  {user && user.username === comment.username && (
-                    <DeleteButton postId={id} commentId={comment.id} />
-                  )}
                 </Card.Content>
               </Card>
             ))}

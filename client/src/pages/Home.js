@@ -13,29 +13,41 @@ function Home() {
   );
 
   return (
-    <Grid columns={3}>
+    <Grid>
       <Grid.Row className="page-title">
         <h1>Recent Posts</h1>
       </Grid.Row>
       <Grid.Row>
+        <Grid.Column width={2} />
         {user && (
-          <GridColumn>
+          <GridColumn width={12}>
             <PostForm />
           </GridColumn>
         )}
-        {loading ? (
-          <h1>Loading posts..</h1>
-        ) : (
-          <Transition.Group>
-            {posts &&
-              posts.map((post) => (
-                <Grid.Column key={post.id} style={{ marginBottom: 20 }}>
-                  <PostCard post={post} />
-                </Grid.Column>
-              ))}
-          </Transition.Group>
-        )}
       </Grid.Row>
+      {loading ? (
+        <Grid.Row>
+          <h2>Loading posts...</h2>
+        </Grid.Row>
+      ) : (
+        <Transition.Group>
+          {posts &&
+            posts.map((post) => (
+              <>
+                <Grid.Row>
+                  <Grid.Column width={2} />
+                  <Grid.Column
+                    key={post.id}
+                    style={{ marginBottom: 20 }}
+                    width={12}
+                  >
+                    <PostCard post={post} />
+                  </Grid.Column>
+                </Grid.Row>
+              </>
+            ))}
+        </Transition.Group>
+      )}
     </Grid>
   );
 }

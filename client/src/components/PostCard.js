@@ -1,10 +1,11 @@
 import moment from "moment";
 import React, { useContext } from "react";
-import { Card, Image, Button, Icon, Label, Popup } from "semantic-ui-react";
 import { Link } from "react-router-dom";
+import { Card, Image } from "semantic-ui-react";
 import { AuthContext } from "../context/auth";
-import LikeButton from "./LikeButton";
+import CommentButton from "./CommentButton";
 import DeleteButton from "./DeleteButton";
+import LikeButton from "./LikeButton";
 const PostCard = ({
   post: { id, body, createdAt, username, likeCount, commentCount, likes },
 }) => {
@@ -12,7 +13,7 @@ const PostCard = ({
 
   return (
     <Card fluid>
-      <Card.Content>
+      <Card.Content as={Link} to={`/post/${id}`}>
         <Image
           floated="right"
           size="mini"
@@ -24,33 +25,13 @@ const PostCard = ({
 
         <Card.Header>{username}</Card.Header>
 
-        <Card.Meta as={Link} to={`/post/${id}`}>
-          {moment(createdAt).fromNow(true)}
-        </Card.Meta>
+        <Card.Meta>{moment(createdAt).fromNow(true)}</Card.Meta>
 
         <Card.Description>{body}</Card.Description>
       </Card.Content>
       <Card.Content extra>
         <LikeButton post={{ id, likes, likeCount }} user={user} />
-        <Popup
-          content="Comment on post"
-          inverted
-          trigger={
-            <Button
-              labelPosition="right"
-              as={Link}
-              to={`/post/${id}`}
-              floated="right"
-            >
-              <Button color="blue" basic>
-                <Icon name="comments" />
-              </Button>
-              <Label basic color="blue" pointing="left">
-                {commentCount}
-              </Label>
-            </Button>
-          }
-        />
+        <CommentButton postId={id} commentCount={commentCount} role="link" />
       </Card.Content>
     </Card>
   );
