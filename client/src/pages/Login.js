@@ -1,7 +1,6 @@
-import { gql } from "apollo-server-core";
 import React, { useState, useContext } from "react";
 import { Button, Form } from "semantic-ui-react";
-import { useMutation } from "@apollo/client";
+import { useMutation, gql } from "@apollo/client";
 import { useForm } from "../utils/hooks";
 import { AuthContext } from "../context/auth";
 

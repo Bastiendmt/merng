@@ -10,9 +10,6 @@ const PostCard = ({
 }) => {
   const { user } = useContext(AuthContext);
 
-  const likePost = () => {};
-  const commentPost = () => {};
-
   return (
     <Card fluid>
       <Card.Content>
