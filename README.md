@@ -7,6 +7,9 @@ This is a fullstack project teaching :
 - MongoDB
 - Semantic UI
 
+## Demo
+![Demo](./preview/twitter-like.gif)
+
 ## Features 
 - User 
   - register
