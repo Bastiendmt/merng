@@ -17,3 +17,5 @@ This is a fullstack project teaching :
   - delete
   - like
   - comment
+
+Insprired by [Classed](https://github.com/hidjou/classsed-graphql-mern-apollo/tree/master)
